@@ -327,12 +327,57 @@ h1, h2, h3, h4, h5, h6 {
     height: 700px;
     background-image: url('headerbackground.png');
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-position: center top;
+    background-attachment: scroll;
+    background-repeat: no-repeat;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        background-attachment: fixed;
+        background-position: center center;
+    }
+}
+
+/* Fix background for mobile devices */
+@media (max-width: 968px) {
+    .hero {
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: top center;
+    }
+}
+
+/* Additional mobile optimizations for very small screens */
+@media (max-width: 480px) {
+    .hero {
+        height: 450px;
+        min-height: 400px;
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: top center;
+    }
+
+    .hero-title {
+        font-size: 42px;
+        padding: 0 20px;
+    }
+
+    .cta-button {
+        padding: 16px 40px;
+        font-size: 14px;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        background-attachment: scroll !important;
+    }
 }
 
 .hero-overlay {
@@ -1790,6 +1835,10 @@ h1, h2, h3, h4, h5, h6 {
 
     .hero {
         height: 600px;
+        background-attachment: scroll;
+        background-position: top center;
+        background-size: cover;
+        min-height: 500px;
     }
 
     .hero-title {
@@ -1826,6 +1875,10 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 600px) {
     .hero {
         height: 500px;
+        min-height: 450px;
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: top center;
     }
 
     .hero-title {

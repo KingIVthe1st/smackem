@@ -87,11 +87,32 @@ document.querySelectorAll('.step-card, .stat-item, .testimonial-card, .fastest-g
 // Parallax effect on hero section
 const hero = document.querySelector('.hero');
 if (hero) {
-    window.addEventListener('scroll', () => {
+    const parallaxSpeed = 0.5;
+    const heroParallax = () => {
         const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
         hero.style.backgroundPositionY = -(scrolled * parallaxSpeed) + 'px';
-    });
+    };
+
+    let parallaxActive = false;
+    const scrollListenerOptions = { passive: true };
+
+    const toggleHeroParallax = () => {
+        const shouldEnable = window.innerWidth >= 1024;
+
+        if (shouldEnable && !parallaxActive) {
+            heroParallax();
+            window.addEventListener('scroll', heroParallax, scrollListenerOptions);
+            parallaxActive = true;
+        } else if (!shouldEnable && parallaxActive) {
+            window.removeEventListener('scroll', heroParallax, scrollListenerOptions);
+            hero.style.backgroundPositionY = '';
+            parallaxActive = false;
+        }
+    };
+
+    toggleHeroParallax();
+    window.addEventListener('resize', toggleHeroParallax);
+    window.addEventListener('orientationchange', toggleHeroParallax);
 }
 
 // Parallax effect on images
