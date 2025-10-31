@@ -879,16 +879,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===================================
-   TIKTOK FEED - ELFSIGHT INTEGRATION
+   TIKTOK FEED - NATIVE EMBED
    =================================== */
 .tiktok-feed-container {
     margin-top: 40px;
     max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Ensure Elfsight widget fits nicely within the red background */
-.tiktok-feed-container > div {
-    width: 100%;
+/* TikTok Native Embed Styling */
+.tiktok-embed {
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* Fallback Button Styling */
@@ -924,13 +930,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 32px;
 }
 
-/* Override Elfsight default styles to match site design */
-.elfsight-app-tiktok-feed {
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-/* Responsive adjustments for Elfsight widget */
+/* Responsive adjustments for TikTok widget */
 @media (max-width: 768px) {
     .tiktok-feed-container {
         margin-top: 24px;
