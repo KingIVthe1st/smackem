@@ -879,40 +879,164 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===================================
-   TIKTOK FEED - NATIVE EMBED
+   SOCIAL MEDIA FEEDS - PREMIUM DUAL LAYOUT
    =================================== */
-.tiktok-feed-container {
-    margin-top: 40px;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.social-feed-section {
+    padding: 100px 0 120px;
+    background: var(--primary-red);
+    position: relative;
+    overflow: hidden;
 }
 
-/* TikTok Native Embed Styling */
+/* Premium Header Styling */
+.social-feed-header {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+}
+
+.social-feed-header h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.social-feed-subtitle {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid Layout - Side by Side on Desktop */
+.social-feeds-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+    align-items: start;
+}
+
+/* Individual Feed Columns */
+.social-feed-column {
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.social-feed-column.tiktok-column {
+    animation-delay: 0.1s;
+}
+
+.social-feed-column.instagram-column {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Platform Labels */
+.social-feed-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 16px 28px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 215, 0, 0.25);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    width: fit-content;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-feed-label:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2);
+}
+
+.social-feed-label svg {
+    color: var(--primary-gold);
+    transition: transform 0.3s ease;
+}
+
+.social-feed-label:hover svg {
+    transform: scale(1.1);
+}
+
+.social-feed-label span {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Feed Wrapper Styling */
+.social-feed-wrapper {
+    position: relative;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-feed-wrapper:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* TikTok Embed Specific */
 .tiktok-embed {
     margin: 0 auto;
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Fallback Button Styling */
-.tiktok-fallback {
-    text-align: center;
+/* Instagram Embed Specific */
+.elfsight-app-e155873b-de10-426c-88b9-9e1188d834cc {
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+/* Fallback Styling */
+.social-fallback {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
     padding: 60px 20px;
 }
 
-.tiktok-cta-button {
+.social-cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px 48px;
+    gap: 12px;
+    padding: 18px 40px;
     background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%);
     color: var(--primary-red);
     text-decoration: none;
     border-radius: 60px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -920,20 +1044,86 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tiktok-cta-button:hover {
+.social-cta-button:hover {
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 12px 48px rgba(255, 215, 0, 0.6);
 }
 
-.tiktok-cta-button svg {
-    width: 32px;
-    height: 32px;
+.social-cta-button svg {
+    width: 24px;
+    height: 24px;
 }
 
-/* Responsive adjustments for TikTok widget */
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+    .social-feeds-grid {
+        gap: 32px;
+    }
+
+    .social-feed-header h2 {
+        font-size: 40px;
+    }
+
+    .social-feed-subtitle {
+        font-size: 18px;
+    }
+}
+
+/* Mobile Responsive - Stack Vertically */
 @media (max-width: 768px) {
-    .tiktok-feed-container {
-        margin-top: 24px;
+    .social-feed-section {
+        padding: 80px 0;
+    }
+
+    .social-feed-header {
+        margin-bottom: 48px;
+    }
+
+    .social-feed-header h2 {
+        font-size: 32px;
+        padding: 0 20px;
+    }
+
+    .social-feed-subtitle {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+
+    .social-feeds-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .social-feed-label {
+        padding: 14px 24px;
+        gap: 10px;
+    }
+
+    .social-feed-label span {
+        font-size: 16px;
+    }
+
+    .social-feed-wrapper {
+        padding: 16px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .social-feed-section {
+        padding: 60px 0;
+    }
+
+    .social-feed-header h2 {
+        font-size: 28px;
+    }
+
+    .social-feed-label {
+        padding: 12px 20px;
+    }
+
+    .social-feed-wrapper {
+        padding: 12px;
     }
 }
 
