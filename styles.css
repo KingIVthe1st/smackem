@@ -879,115 +879,61 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===================================
-   TIKTOK FEED - CUSTOM INTEGRATION
+   TIKTOK FEED - ELFSIGHT INTEGRATION
    =================================== */
-.tiktok-section {
-    background: var(--primary-red);
-}
-
 .tiktok-feed-container {
     margin-top: 40px;
     max-width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
-.tiktok-embed-wrapper {
+/* Ensure Elfsight widget fits nicely within the red background */
+.tiktok-feed-container > div {
     width: 100%;
-    max-width: 600px;
 }
 
-.tiktok-cta-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Fallback Button Styling */
+.tiktok-fallback {
     text-align: center;
-    padding: 60px 40px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
+    padding: 60px 20px;
 }
 
-.tiktok-cta-card:hover {
-    transform: translateY(-8px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary-gold);
-    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
-}
-
-.tiktok-icon-wrapper {
-    margin-bottom: 24px;
-    color: var(--primary-gold);
-}
-
-.tiktok-cta-card h3 {
-    font-size: 32px;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-}
-
-.tiktok-cta-card p {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 24px;
-    line-height: 1.6;
-    max-width: 450px;
-}
-
-.tiktok-username {
-    display: inline-block;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--primary-gold);
-    margin-bottom: 32px;
-    letter-spacing: 0.5px;
-}
-
-.tiktok-button {
-    display: inline-block;
-    padding: 16px 48px;
+.tiktok-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 48px;
     background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%);
     color: var(--primary-red);
+    text-decoration: none;
     border-radius: 60px;
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tiktok-cta-card:hover .tiktok-button {
-    transform: scale(1.05);
+.tiktok-cta-button:hover {
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 0 12px 48px rgba(255, 215, 0, 0.6);
 }
 
-/* Responsive adjustments for TikTok widget */
+.tiktok-cta-button svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Override Elfsight default styles to match site design */
+.elfsight-app-tiktok-feed {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Responsive adjustments for Elfsight widget */
 @media (max-width: 768px) {
     .tiktok-feed-container {
         margin-top: 24px;
-    }
-
-    .tiktok-cta-card {
-        padding: 40px 24px;
-    }
-
-    .tiktok-cta-card h3 {
-        font-size: 26px;
-    }
-
-    .tiktok-cta-card p {
-        font-size: 16px;
-    }
-
-    .tiktok-username {
-        font-size: 18px;
     }
 }
 
