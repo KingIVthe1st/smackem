@@ -13,23 +13,32 @@ if (mobileMenuToggle) {
     // Close menu when clicking on a link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', (e) => {
-            // Close mobile menu
-            mobileMenuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            body.style.overflow = '';
-
             // Handle smooth scrolling for anchor links
             const href = link.getAttribute('href');
             if (href && href.startsWith('#') && href !== '#home') {
                 e.preventDefault();
+
+                // Close mobile menu first
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+
+                // Scroll after menu close animation completes
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 400); // Match the menu transition time (0.4s)
                 }
+            } else {
+                // For non-anchor links, just close the menu
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
             }
         });
     });
