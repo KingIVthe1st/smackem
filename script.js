@@ -133,6 +133,7 @@ parallaxImages.forEach(img => {
 
 // Premium scroll-based navigation hide/show
 const nav = document.querySelector('.main-nav');
+const mobileCTA = document.querySelector('.mobile-sticky-cta');
 let lastScroll = 0;
 const scrollThreshold = 80; // Minimum scroll before hiding nav
 const scrollBuffer = 10; // Prevents jitter from small scroll movements
@@ -144,6 +145,12 @@ window.addEventListener('scroll', () => {
     if (currentScroll <= scrollThreshold) {
         nav.classList.remove('nav-hidden');
         nav.style.boxShadow = '0 4px 24px rgba(211, 47, 47, 0.25)';
+
+        // Hide mobile CTA at top of page
+        if (mobileCTA) {
+            mobileCTA.classList.add('hidden');
+        }
+
         lastScroll = currentScroll;
         return;
     }
@@ -153,14 +160,24 @@ window.addEventListener('scroll', () => {
         return;
     }
 
-    // Scrolling down - hide nav
-    if (currentScroll > lastScroll && !nav.classList.contains('nav-hidden')) {
-        nav.classList.add('nav-hidden');
+    // Scrolling down - hide nav, show mobile CTA
+    if (currentScroll > lastScroll) {
+        if (!nav.classList.contains('nav-hidden')) {
+            nav.classList.add('nav-hidden');
+        }
+        if (mobileCTA && mobileCTA.classList.contains('hidden')) {
+            mobileCTA.classList.remove('hidden');
+        }
     }
-    // Scrolling up - show nav
-    else if (currentScroll < lastScroll && nav.classList.contains('nav-hidden')) {
-        nav.classList.remove('nav-hidden');
-        nav.style.boxShadow = '0 8px 32px rgba(211, 47, 47, 0.35)';
+    // Scrolling up - show nav, hide mobile CTA
+    else if (currentScroll < lastScroll) {
+        if (nav.classList.contains('nav-hidden')) {
+            nav.classList.remove('nav-hidden');
+            nav.style.boxShadow = '0 8px 32px rgba(211, 47, 47, 0.35)';
+        }
+        if (mobileCTA && !mobileCTA.classList.contains('hidden')) {
+            mobileCTA.classList.add('hidden');
+        }
     }
 
     lastScroll = currentScroll;
