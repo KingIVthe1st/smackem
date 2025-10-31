@@ -110,21 +110,40 @@ parallaxImages.forEach(img => {
     });
 });
 
-// Sticky nav background change on scroll
+// Premium scroll-based navigation hide/show
 const nav = document.querySelector('.main-nav');
 let lastScroll = 0;
+const scrollThreshold = 80; // Minimum scroll before hiding nav
+const scrollBuffer = 10; // Prevents jitter from small scroll movements
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
-    if (currentScroll > 100) {
-        nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
-    } else {
-        nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+    // Don't hide nav at the very top of the page
+    if (currentScroll <= scrollThreshold) {
+        nav.classList.remove('nav-hidden');
+        nav.style.boxShadow = '0 4px 24px rgba(211, 47, 47, 0.25)';
+        lastScroll = currentScroll;
+        return;
+    }
+
+    // Only process if scroll difference exceeds buffer (prevents jitter)
+    if (Math.abs(currentScroll - lastScroll) < scrollBuffer) {
+        return;
+    }
+
+    // Scrolling down - hide nav
+    if (currentScroll > lastScroll && !nav.classList.contains('nav-hidden')) {
+        nav.classList.add('nav-hidden');
+    }
+    // Scrolling up - show nav
+    else if (currentScroll < lastScroll && nav.classList.contains('nav-hidden')) {
+        nav.classList.remove('nav-hidden');
+        nav.style.boxShadow = '0 8px 32px rgba(211, 47, 47, 0.35)';
     }
 
     lastScroll = currentScroll;
-});
+}, { passive: true });
 
 // Add counter animation for stats
 const animateCounter = (element, target) => {
