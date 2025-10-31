@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmackEm Seafood Franchise Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .application-page {
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--light-bg) 0%, #ffffff 100%);
+            padding: 140px 0 80px;
+        }
+
+        .application-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .application-header h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            color: var(--primary-red);
+            margin-bottom: 16px;
+        }
+
+        .application-header .divider {
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-red) 0%, var(--primary-gold) 100%);
+            margin: 24px auto;
+            border-radius: 2px;
+        }
+
+        .application-intro {
+            max-width: 800px;
+            margin: 0 auto 32px;
+            text-align: center;
+        }
+
+        .application-intro p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .required-note {
+            font-style: italic;
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .application-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 64px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .form-field {
+            margin-bottom: 28px;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        .form-field label .required {
+            color: var(--primary-red);
+            margin-left: 4px;
+        }
+
+        .form-field input,
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: #ffffff;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus,
+        .form-field select:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.1);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-field select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23333' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            padding-right: 50px;
+        }
+
+        .captcha-field {
+            margin: 32px 0;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .captcha-placeholder {
+            width: 200px;
+            height: 60px;
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+            color: var(--text-light);
+            border: none;
+            border-radius: 60px;
+            font-size: 17px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(211, 47, 47, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(211, 47, 47, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .application-page {
+                padding: 120px 0 60px;
+            }
+
+            .application-container {
+                padding: 40px 32px;
+            }
+
+            .captcha-field {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="smackemlogo.png" alt="SmackEm Seafood Logo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#menu">Menu</a></li>
+                <li><a href="index.html#story">Our Story</a></li>
+                <li><a href="index.html#locations">Locations</a></li>
+                <li><a href="index.html#franchising">Franchising</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/smackemseafood/" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/smackemseafood" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Application Form Page -->
+    <div class="application-page">
+        <div class="container">
+            <div class="application-header">
+                <h1>SmackEm Seafood Franchise Application</h1>
+                <div class="divider"></div>
+            </div>
+
+            <div class="application-intro">
+                <p>Thank you for your interest in SmackEm Seafood. In order to be considered for a franchise opportunity, please complete the form below.</p>
+                <p class="required-note">Please Note: Incomplete applications will not be considered.</p>
+            </div>
+
+            <div class="application-container">
+                <form id="franchiseApplicationForm" class="franchise-application-form">
+                    <div class="form-field">
+                        <label for="fullName">Name<span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Email<span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="confirmEmail">Confirm Email<span class="required">*</span></label>
+                        <input type="email" id="confirmEmail" name="confirmEmail" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="mobile">Mobile<span class="required">*</span></label>
+                        <input type="tel" id="mobile" name="mobile" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="city">City<span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="state">State<span class="required">*</span></label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="creditScore">Credit Score<span class="required">*</span></label>
+                        <input type="text" id="creditScore" name="creditScore" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="availableCapital">Available Capital for Investment<span class="required">*</span></label>
+                        <input type="text" id="availableCapital" name="availableCapital" placeholder="e.g., $250,000" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="fundingPlan">How are you planning to fund a franchise venture with SmackEm Seafood?<span class="required">*</span></label>
+                        <select id="fundingPlan" name="fundingPlan" required>
+                            <option value="">Please select from list below</option>
+                            <option value="personal">Personal Finance/Liquidity</option>
+                            <option value="traditional">Traditional Financing Sources</option>
+                            <option value="asset">Asset Leverage</option>
+                            <option value="combination">Combination of Sources</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="experience">Previous Restaurant or Food Service Experience</label>
+                        <textarea id="experience" name="experience" placeholder="Please describe any relevant experience..."></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="whyYou">Why should we consider you as a franchise owner?</label>
+                        <textarea id="whyYou" name="whyYou" placeholder="Tell us what makes you a great candidate..."></textarea>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="hearAboutUs">How Did You Hear About Us?<span class="required">*</span></label>
+                        <select id="hearAboutUs" name="hearAboutUs" required>
+                            <option value="">Please select from list below</option>
+                            <option value="google">Google Search</option>
+                            <option value="social">Social Media</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="referral">Referral</option>
+                            <option value="news">News/Press</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="captcha-field">
+                        <div class="captcha-placeholder">
+                            reCAPTCHA placeholder
+                        </div>
+                        <small style="color: #666;">Captcha verification will be added here</small>
+                    </div>
+
+                    <button type="submit" class="submit-button">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="smackemlogo.png" alt="SmackEm Seafood Logo" class="logo-img">
+            </div>
+            <div class="footer-contact">
+                <p>franchise@smackemseafood.com</p>
+                <p>659 S Flower St, Los Angeles, CA 90017</p>
+            </div>
+            <div class="footer-social">
+                <h4>FOLLOW US ON SOCIAL</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/smackemseafood/" target="_blank">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/smackemseafood" target="_blank">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2025 SmackEm Seafood. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form validation
+        const form = document.getElementById('franchiseApplicationForm');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate email match
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+
+            if (email !== confirmEmail) {
+                alert('Email addresses do not match. Please check and try again.');
+                return;
+            }
+
+            // Collect form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            console.log('Form submitted with data:', data);
+
+            // Show success message
+            alert('Thank you for your franchise application! We will review your submission and contact you within 48-72 hours.');
+
+            // Reset form
+            form.reset();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
